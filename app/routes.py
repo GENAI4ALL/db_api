@@ -1,22 +1,12 @@
-
 from flask import Blueprint, request, jsonify
-from . import db
-from .models import User
+from .models import BoroughCount
 
 main = Blueprint('main', __name__)
 
-@main.route('/add_user', methods=['POST'])
-def add_user():
-    user_data = request.get_json()
-    new_user = User(username=user_data['username'])
-    db.session.add(new_user)
-    db.session.commit()
-    return 'Done', 201
-
-@main.route('/users')
-def users():
-    user_list = User.query.all()
-    users = []
-    for user in user_list:
-        users.append({'username': user.username})
-    return jsonify(users)
+@main.route('/boroughs')
+def boroughs():
+    boro_list = BoroughCount.query.all()
+    boros = []
+    for boro in boro_list:
+        boros.append({"borough": boro.borough, "total": boro.total})
+    return jsonify(boros)

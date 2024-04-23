@@ -1,6 +1,6 @@
-
 from . import db
 
-class User(db.Model):
+class BoroughCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
+    borough = db.Column(db.String(50), nullable=False)
+    total = db.Column(db.Integer, nullable=False)
